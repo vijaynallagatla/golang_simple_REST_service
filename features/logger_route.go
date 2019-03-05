@@ -6,5 +6,5 @@ import (
 
 // Routes ...
 func Routes(router *httprouter.Router) {
-	router.HandlerFunc("GET", "/", logInfo)
+	router.HandlerFunc("GET", "/", sampleGETRequest)
 }

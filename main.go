@@ -17,13 +17,7 @@ func init() {
 	log.SetOutput(os.Stdout)
 }
 
-func logMessageEveryTenSecond() {
-	log.WithFields(log.Fields{
-		"tag": "INFO",
-	}).Info("Sample goLang REST service.")
-}
 func main() {
-	go logMessageEveryTenSecond()
 	router := httprouter.New()
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:8081", "http://127.0.0.1:8081"},
@@ -33,7 +27,7 @@ func main() {
 		AllowedHeaders:   []string{"*"},
 	})
 	handler := c.Handler(router)
+	log.Printf("Starting service. \n Listening at 0.0.0.0:8081")
 	applicationRoute.ApplicationRoutes(router)
-	log.Printf("Server started. \n Listening at 0.0.0.0:8081")
 	log.Fatal(http.ListenAndServe(":8081", handler))
 }
